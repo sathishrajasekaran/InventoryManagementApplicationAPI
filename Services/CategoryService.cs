@@ -22,8 +22,27 @@ public class CategoryService : ICategoryService
         return await _repo.CreatenewCaterogyAsync(newCategory);
     }
 
-    public async Task<List<Category>> GetAllCategoryAsync()
+    public async Task<List<CategoryGetDTO>> GetAllCategoryAsync()
     {
-        return await _repo.GetAllCategoryAsync();
+        var categories = await _repo.GetAllCategoryAsync();
+        if(categories == null || categories.Count == 0)
+        {
+            return new List<CategoryGetDTO>();
+        }
+        return categories.Select(c => new CategoryGetDTO
+        {
+            CategoryID = c.CategoryID,
+            CategoryName = c.CategoryName,
+            Products = c.Products.Select(p => new ProductGetDTO
+            {
+                ProductID = p.Id,
+                ProductName = p.ProductName,
+                price = p.price,
+                quantity = p.quantity,
+                CategoryName = c.CategoryName,
+                Reportlevel = p.Reportlevel
+            }).ToList()
+        }).ToList();
+
     }
 }

@@ -13,14 +13,37 @@ public class ProductService : IProductService
     {
         _repo = repo;
     }
-    public async Task<List<Product>> GetallProductsAsync()
+    public async Task<List<ProductGetDTO>> GetallProductsAsync()
     {
-        return await _repo.GetallProductsAsync();
+        var products = await _repo.GetallProductsAsync();
+        var productDTOs = products.Select(p => new ProductGetDTO
+        {
+            ProductID = p.Id,
+            ProductName = p.ProductName,
+            price = p.price,
+            quantity = p.quantity,
+            CategoryName = p.Category?.CategoryName ?? string.Empty,
+            Reportlevel = p.Reportlevel
+        }).ToList();
+        
+        return productDTOs;
     }
 
-    public async Task<Product?> GetProductsByIDAsync(int id)
+    public async Task<ProductGetDTO?> GetProductsByIDAsync(int id)
     {
-        return await _repo.GetProductsByIDAysnc(id);
+        var product = await _repo.GetProductsByIDAysnc(id);
+        if (product == null)
+            return null;
+
+        return new ProductGetDTO
+        {
+            ProductID = product.Id,
+            ProductName = product.ProductName,
+            price = product.price,
+            quantity = product.quantity,
+            CategoryName = product.Category?.CategoryName ?? string.Empty,
+            Reportlevel = product.Reportlevel
+        };
     }
 
     public async Task<ProductCreateDTO> AddNewProductsAsync(ProductCreateDTO dto)

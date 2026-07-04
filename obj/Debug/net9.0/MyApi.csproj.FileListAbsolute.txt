@@ -137,3 +137,4 @@ D:\C#_programs\InventoryManagementApp\InventoryManagementApi\bin\Debug\net9.0\ru
 D:\C#_programs\InventoryManagementApp\InventoryManagementAPI\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
 D:\C#_programs\InventoryManagementApp\InventoryManagementAPI\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 D:\C#_programs\InventoryManagementApp\InventoryManagementAPI\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\C#_programs\InventoryManagementApp\InventoryManagementAPI\obj\Debug\net9.0\MyApi.sourcelink.json
