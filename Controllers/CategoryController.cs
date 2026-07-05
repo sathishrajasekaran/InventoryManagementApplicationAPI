@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using InventoryManagementAPI.Services;
 using InventoryManagementAPI.Models;
 using InventoryManagementAPI.DTOs;
@@ -7,6 +8,7 @@ namespace InventoryManagementAPI.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 
 public class CategoryController : ControllerBase
 {

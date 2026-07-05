@@ -17,12 +17,12 @@ namespace MyApi.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.0")
+                .HasAnnotation("ProductVersion", "9.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("InventoryManagementAPI.models.Category", b =>
+            modelBuilder.Entity("InventoryManagementAPI.Models.Category", b =>
                 {
                     b.Property<int>("CategoryID")
                         .ValueGeneratedOnAdd()
@@ -39,7 +39,7 @@ namespace MyApi.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("InventoryManagementAPI.models.Product", b =>
+            modelBuilder.Entity("InventoryManagementAPI.Models.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -74,7 +74,7 @@ namespace MyApi.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("InventoryManagementAPI.models.Supplier", b =>
+            modelBuilder.Entity("InventoryManagementAPI.Models.Supplier", b =>
                 {
                     b.Property<int>("SupplierId")
                         .ValueGeneratedOnAdd()
@@ -95,7 +95,7 @@ namespace MyApi.Migrations
                     b.ToTable("Suppliers");
                 });
 
-            modelBuilder.Entity("InventoryManagementAPI.models.User", b =>
+            modelBuilder.Entity("InventoryManagementAPI.Models.User", b =>
                 {
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
@@ -103,7 +103,11 @@ namespace MyApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
 
-                    b.Property<string>("Password")
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -120,9 +124,9 @@ namespace MyApi.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("InventoryManagementAPI.models.Product", b =>
+            modelBuilder.Entity("InventoryManagementAPI.Models.Product", b =>
                 {
-                    b.HasOne("InventoryManagementAPI.models.Category", "Category")
+                    b.HasOne("InventoryManagementAPI.Models.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -131,7 +135,7 @@ namespace MyApi.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("InventoryManagementAPI.models.Category", b =>
+            modelBuilder.Entity("InventoryManagementAPI.Models.Category", b =>
                 {
                     b.Navigation("Products");
                 });
